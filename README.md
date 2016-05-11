@@ -53,7 +53,8 @@ An example:
 
     export LOLCOMMITS_DIR=$HOME/Dropbox/lolcommits
     export SLACK_TOKEN=TOKEN
-    nohup slackcat -c lolcommits -m "$(ls $HOME/Dropbox/lolcommits/${PWD##*/}/$(git rev-parse HEAD | cut -c1-11).*)" -T "$(lolcommits --capture --animate=5 --stealth)" &>/dev/null & 
+    nohup slackcat -c lolcommits -m "$(ls $HOME/Dropbox/lolcommits/${PWD##*/}/$(git rev-parse HEAD | cut -c1-11).*)" -T "$(echo "$(lolcommits --capture --animate=5)" | tail -1)" &>/dev/null &%
+
 
 ### Please Note
 
