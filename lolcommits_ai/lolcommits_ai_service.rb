@@ -42,12 +42,12 @@ class LolcommitsAIService
     #puts response.body
     result = JSON.parse(response.body)
     if result
-      result['description']['captions'][0]['text']
+      return result['description']['captions'][0]['text']
     end
   end
 
   def post_video
-    puts "Posting Video #{@video_file}"
+    #puts "Posting Video #{@video_file}"
     uri = URI('https://api.projectoxford.ai/emotion/v1.0/recognizeinvideo')
 
     http = Net::HTTP.new(uri.host, uri.port)
@@ -63,13 +63,13 @@ class LolcommitsAIService
 
     response = http.request(request)
 
-    puts response.body
+    #puts response.body
 
     @waiting_url = response.header['operation-location']
   end
 
   def wait_for_and_get_results
-    puts "Getting results"
+    #puts "Getting results"
 
     # url = 'https://api.projectoxford.ai/emotion/v1.0/operations/5edb2c9b-dbf3-45d7-b368-c8ff43e27ee2'
     uri = URI(@waiting_url)
@@ -85,7 +85,7 @@ class LolcommitsAIService
 
     while body['status'] != 'Succeeded'
       progress = body['progress']
-      puts "Result not ready. Waiting... (#{progress}%)"
+      #puts "Result not ready. Waiting... (#{progress}%)"
       sleep 10
 
       response = http.request(request)
